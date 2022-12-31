@@ -233,10 +233,11 @@ impl<'a> Control<'a> {
         self.set_iovar("bsscfg:event_msgs", &evts.to_bytes()).await;
 
         Timer::after(Duration::from_millis(100)).await;
-
+        info!("Event mask set, set wifi up");
         // set wifi up
         self.ioctl(IoctlType::Set, IOCTL_CMD_UP, 0, &mut []).await;
 
+        info!("Wifi up");
         Timer::after(Duration::from_millis(100)).await;
 
         // power save mode 2
